@@ -1,0 +1,503 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 20px;
+    --red-orange: hsl(17, 95%, 40%);
+    --max-width: 1300px;
+}
+
+body {
+    --gradient-angle: 175deg;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    margin: 0;
+    font-family: "Special Elite", "Courier New", monospace;
+    background-color: hsl(200, 16%, 96%);
+    background-blend-mode: multiply, multiply, normal;
+    background-image: 
+        url(../assets/scribbles2.webp),
+        repeating-linear-gradient(
+            to left,
+            hsl(207, 52%, 75%) 1px 1px,
+            hsl(207, 52%, 90%) 2px 2px,
+            transparent 3px 32px
+        ),
+        repeating-linear-gradient(
+            hsl(207, 52%, 75%) 1px 1px,
+            hsl(207, 52%, 90%) 2px 2px,
+            transparent 3px 32px
+        );
+}
+
+h1,
+h2,
+h3 {
+    font-weight: 100;
+    font-family: "Permanent Marker", "Comic Sans MS", sans-serif;
+    margin: 0;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+body > div:first-of-type {
+    position: relative;
+    overflow: clip;
+    min-height: 14rem;
+    padding: 2rem 1rem 5rem 1rem;
+    transition: --gradient-angle 100ms ease-out;
+    margin-bottom: 1rem;
+    background-image: 
+        linear-gradient(
+            var(--gradient-angle), 
+            var(--red-orange) 49.75%, 
+            transparent 50%
+        ),
+        linear-gradient(
+            var(--gradient-angle), 
+            rgba(0,0,0,0.75) 50%, 
+            transparent 52%
+        ),
+        linear-gradient(
+            var(--gradient-angle),
+            hsl(17, 95%, 20%) 54.75%,
+            transparent 55%
+        ),
+        linear-gradient(
+            var(--gradient-angle), 
+            rgba(0,0,0,0.75) 55%, 
+            transparent 57%
+        );
+
+    & h1 {
+        color: #fff;
+        font-weight: 100;
+        font-family: "Rubik Dirt", "Arial Black", "Arial", sans-serif;
+        font-size: 4rem;
+    }
+
+    & span {
+        color: #000;
+        display: inline-block;
+        font-family: "Permanent Marker", "Comic Sans MS", sans-serif;
+        transform: rotate(-8deg) translateX(-0.5rem);
+        font-size: 2rem;
+        line-height: 1.25;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        mix-blend-mode: soft-light;
+        background-image: url(../assets/gray-tile-light.jpg);
+        opacity: 0.75;
+    }
+
+    &::before {
+        content: "";
+        background-size: 40px 40px;
+        position: absolute;
+        z-index: -1;
+        margin-bottom: 2rem;
+        inset: 0;
+        box-shadow: 0 0.25rem 0.25rem rgba(0,0,0,0.75);
+        background-image:
+            radial-gradient(
+                circle at 20%,
+                #797979 5.5px,
+                #111 6px
+            );
+    }
+}
+
+main {
+    margin: 0 auto;
+    line-height: 1.5;
+
+    & > div:first-child {
+        overflow: clip;
+        color: rgb(44, 27, 10);
+        font-family: "Special Elite", "Courier New", monospace;
+        transform: rotate(-0.5deg);
+        text-align: center;
+        padding: 1rem 2rem;
+        border-radius: 2rem;
+        margin: 0 8px;
+        max-width: 800px;
+        background-blend-mode: overlay;
+        background-image: url(../assets/gray-tile-light.jpg);
+        background-color: #bbb8b2;
+        box-shadow: 0.25rem 0.25rem 0.25rem rgba(0,0,0,0.75);
+
+        & strong {
+            color: rgb(122, 8, 8);
+        }
+    }
+}
+
+.d-flex {
+    display: flex;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+select {
+    border: 1px solid #000;
+}
+
+.options {
+    margin: 4rem auto 2rem;
+    position: relative;
+    padding: 5rem 8px;
+    z-index: 0;
+    background-size: auto, auto, 40px 40px;
+    box-shadow: 
+        0.25rem 0.25rem 0.25rem rgba(0,0,0,0.75), 
+        0.25rem -0.25rem 0.25rem rgba(0,0,0,0.75);
+    overflow-x: clip;
+    background-image:
+        linear-gradient(
+            1deg,
+            transparent 2.95rem,
+            hsl(17, 95%, 20%) 3rem,
+            hsl(17, 95%, 20%) calc(100% - 2.95rem),
+            transparent calc(100% - 3rem)
+        ),
+        linear-gradient(
+            1deg,
+            transparent 2.25rem,
+            rgba(0,0,0,0.75) 3rem,
+            rgba(0,0,0,0.75) calc(100% - 3rem),
+            transparent calc(100% - 2.25rem)
+        ),
+        radial-gradient(
+            circle at 20%,
+            #797979 5.5px,
+            #111 6px
+        );
+
+    & > div {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        margin: 1rem auto;
+    }
+
+    & .opt-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-inline: auto;
+        z-index: 5;
+        margin: 0 auto;
+        max-width: var(--max-width);
+        gap: 2rem;
+        
+        & > div {
+            overflow: clip;
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            min-height: 325px;
+            padding: 1rem;
+            box-shadow: 0.25rem 0.25rem 0.25rem rgba(0,0,0,0.75);
+            border-radius: 0.25rem;
+
+            & p {
+                line-height: 1.1;
+            }
+        }
+
+        & > div::before {
+            position: absolute;
+            inset: 0;
+            content: "";
+            z-index: -1;
+            background-color: #fff;
+            filter: blur(0.25px);
+            background-image: linear-gradient(
+                to bottom,
+                #fff 0 calc(3rem + 0.5rem),
+                rgb(228, 124, 142) calc(3rem + 0.5rem) calc(3rem + 0.5rem + 1px),
+                transparent calc(3rem + 0.5rem + 1px) 100%
+            ),
+            repeating-linear-gradient(
+                to bottom,
+                transparent 0 calc(1rem + (0.5rem / 3) - 1px), 
+                hsl(206, 39%, 61%) calc(1rem + (0.5rem / 3) - 1px) calc(1rem + (0.5rem / 3))
+            );
+        }
+
+        & > div:first-child {
+            transform: rotate(0.75deg);
+        }
+
+        & > div:last-child {
+            transform: rotate(-0.5deg);
+        }
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        inset: 0;
+        pointer-events: none;
+        mix-blend-mode: soft-light;
+        background-image: url(../assets/gray-tile-light.jpg);
+    }
+
+    &::after {
+        transform-origin: center;
+        transform: rotate(1deg) scaleX(300%);
+        box-shadow: 
+            0.25rem 0.25rem 0.25rem rgba(0,0,0,0.75), 
+            0.25rem -0.25rem 0.25rem rgba(0,0,0,0.75);
+        content: "";
+        inset: 4rem;
+        z-index: -5;
+        position: absolute;
+        overflow: hidden;
+        pointer-events: none;
+        background: var(--red-orange);
+    }
+}
+
+.params {
+    gap: 1rem;
+}
+
+button, 
+input[type="submit"] {
+    --saturation: 50%;
+    --lightness: 50%;
+    --border-sat: 40%;
+    --border-light: 30%;
+    --shadow: 0.75;
+    white-space: normal;
+    font-family: "Permanent Marker", "Comic Sans MS", sans-serif;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: block;
+    min-height: 2rem;
+    min-width: 3rem;
+    padding: 0.5rem 1rem;
+    border-width: 0.25rem;
+    border-style: solid;
+    border-radius: 0.5rem;
+    box-shadow: 0.2rem 0.2rem 0.3rem rgba(0,0,0,var(--shadow));
+    transition: 100ms;
+    max-width: 500px;
+
+    &:hover {
+        --saturation: 65%;
+        --lightness: 65%;
+        --border-sat: 75%;
+        --border-light: 35%;
+    }
+
+    &:active {
+        --saturation: 50%;
+        --lightness: 40%;
+        --border-sat: 35%;
+        --border-light: 15%;
+        --shadow: 0;
+    }
+}
+
+input[type="file"] {
+    display: none;
+    visibility: hidden;
+}
+
+label[for="file"] {
+    display: inline-flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+
+    & button {
+        font-weight: 100;
+        border: 9px solid transparent;
+        border-image: url(../assets/border-image-line.webp) 18 stretch;
+        font-family: "Rubik Dirt", "Arial Black", "Arial", sans-serif;
+        background-color: transparent;
+        color: #000;
+        box-shadow: 0 0 0 rgba(0,0,0,0);
+    }
+}
+
+input[type="submit"] {
+    position: relative;
+    font-size: 1.5rem;
+    background: #fff;
+    border-width: 10px;
+    border-image: url(../assets/border-image-line2.webp) 30 stretch;
+    border-image-outset: 3px;
+    margin: 0 auto 2rem;
+
+    &:active,
+    &[aria-disabled="true"] {
+        color: #fff;
+        background: var(--red-orange);
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+
+    &[aria-disabled="true"] {
+        cursor: not-allowed;
+    }
+}
+
+.modal-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    overflow: auto;
+    z-index: 9999;
+    inset: 0;
+    height: 100%;
+    backdrop-filter: blur(5px) brightness(50%) saturate(50%) contrast(75%);
+}
+
+.modal {
+    line-height: 1.5;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    max-width: 400px;
+    width: 100%;
+    background: #fff;
+    padding: 1rem;
+    margin: 0 1rem;
+    text-align: center;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 19px;
+    border-image: url(../assets/border-image-line2.webp) 44 stretch;
+    border-image-outset: 7px;
+    box-shadow: 0.5rem 0.5rem 0.5rem rgba(0,0,0,0.75);
+
+    & h1 {
+        color: #000;
+        line-height: 1;
+        margin: 0;
+    }
+}
+
+.modal div > button {
+    background-color: #fff;
+    border-color: transparent;
+    border-width: 9px;
+    border-image: url(../assets/border-image-line.webp) 13 stretch;
+    border-image-outset: 3px;
+
+    &:active {
+        color: #fff;
+        background: var(--red-orange);
+    }
+}
+
+#canvas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 1rem;
+    max-width: calc(var(--max-width) + 2rem);
+    aspect-ratio: 16 / 9;
+    background-color: #fff;
+    box-shadow: 0.25rem 0.25rem 0.25rem rgba(0,0,0,0.75);
+    margin: 0 8px;
+    text-align: center;
+
+    & p {
+        filter: blur(0.45px);
+        color: hsl(0, 88%, 25%);
+    }
+
+    & div:not(.tooltip) {
+        color: #000;
+    }
+}
+
+.tooltip {
+    position: absolute;
+    width: max-content;
+    font-family: "Permanent Marker", "Comic Sans MS", sans-serif;
+    background-color: #fff;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 9px;
+    border-image: url(../assets/border-image-line.webp) 13 stretch;
+    border-image-outset: 4px;
+    animation-name: FloatyToolTip;
+    animation-iteration-count: 1;
+    box-shadow: 0.25rem 0.25rem 0.25rem rgba(0,0,0,0.75);
+    font-size: 1.5rem;
+    user-select: none;
+}
+
+@keyframes FloatyToolTip {
+
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+footer {
+    margin: 2rem 0 0;
+    font-size: 0.75rem;
+    text-align: center;
+    color: rgb(44, 27, 10);
+}
+
+@media (min-width: 805px) {
+    main > div:first-child {
+        width: 100%;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 1200px) {
+    .options {
+        & .opt-container {
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: space-between;
+            width: 100%;
+        }
+    }
+
+    #canvas {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    footer {
+        text-align: right;
+    }
+}

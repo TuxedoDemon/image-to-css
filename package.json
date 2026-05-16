@@ -1,0 +1,9 @@
+{
+    "type": "module",
+    "dependencies": {
+        "webpack": "^5.106.2"
+    },
+    "devDependencies": {
+        "webpack-cli": "^7.0.2"
+    }
+}
