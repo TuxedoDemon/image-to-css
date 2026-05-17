@@ -5,7 +5,6 @@ include 'php/control.php';
 
 if (\file_exists('php/config.dev.php')) {
     include 'php/config.dev.php';
-    include 'php/functions.php';
 } else {
     include 'php/config.php';
 }
@@ -35,6 +34,9 @@ for ($i = 1; $i <= 10; $i++) {
 
 $size = createList($block_size, "px");
 $auto_version = "autoVersion";
+
+if (!\function_exists($auto_version)) $auto_version = fn ($string) => $string; 
+
 echo <<<HTML
 <!DOCTYPE html>
 <html lang="en">
