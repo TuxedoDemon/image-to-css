@@ -26,7 +26,7 @@ function calculateAngle() {
 
     const rem = parseInt(getComputedStyle(document.documentElement).fontSize);
     const width = parseFloat(getComputedStyle(document.querySelector("body > div:first-of-type")).width);
-    const height = parseFloat(getComputedStyle(document.querySelector("body > div:first-of-type")).height) - rem * 4;
+    const height = parseFloat(getComputedStyle(document.querySelector("body > div:first-of-type")).height) - (rem * 4);
 
     const hypot = Math.sqrt(width**2 + (height)**2);
     const small_angle = 180 - (Math.asin((height) / hypot) * 180 / Math.PI);
@@ -44,21 +44,9 @@ function setAngle() {
 
 function animateTooltip(tooltip, duration, y) {
 
-    let zero;
-
-    requestAnimationFrame(firstFrame);
-
-    function firstFrame(timestamp) {
-
-        zero = timestamp;
-        animate(timestamp, y);
-
-    }
-
-    function animate(timestamp, y) {
-
+    let zero;    
+    const animate = (timestamp, y) => {
         const value = (timestamp - zero) / duration;
-
         if (value < 1) {
             y--;
             tooltip.style.setProperty("--top", `${y}px`);
@@ -66,30 +54,56 @@ function animateTooltip(tooltip, duration, y) {
         } else {
             tooltip.remove();
         }
-
     }
+    const firstFrame = (timestamp) => {
+        zero = timestamp;
+        animate(timestamp, y);
+    }
+
+    requestAnimationFrame(firstFrame);
 
 }
 
-const handleCopyEvent = (e) => {
+const handleCopyEvent = async (e) => {
 
-    if (Output.txt) {
-        e.stopPropagation();
-        const duration = 3000;
-        const tooltip = document.createElement("div");
-        const message = document.createTextNode("Code Copied!");
-        tooltip.append(message);
-        const rect = OutputData.canvas.getBoundingClientRect();
-        navigator.clipboard.writeText(Output.txt);
-        tooltip.classList.add("tooltip");
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        tooltip.style.setProperty("--top", `${y}px`);
-        tooltip.style.setProperty("--left", `${x - 50}px`);
-        tooltip.style.cssText += `animation-duration: ${duration}ms; left: var(--left); top: var(--top);`;
-        OutputData.canvas.append(tooltip);
-        animateTooltip(tooltip, duration, y);
-    }
+    if (!Output.txt) return;
+    
+    let message;
+    const coords = getRect(e);
+    const [tooltip, duration, y] = createToolTip(coords);
+    await navigator.clipboard.writeText(Output.txt).then(
+        success => message = document.createTextNode("Code Copied!"),
+        rejected => message = document.createTextNode("Couldn't Copy! Too Big!!")
+    );
+    tooltip.append(message);
+    OutputData.canvas.append(tooltip);
+    animateTooltip(tooltip, duration, y);
+
+}
+
+function getRect(e) {
+
+    const rect = OutputData.canvas.getBoundingClientRect();
+    const coords = {
+        x : e.clientX - rect.left,
+        y : e.clientY - rect.top
+    };
+
+    return coords;
+
+}
+
+function createToolTip(coords) {
+
+    const duration = 3000;
+    const tooltip = document.createElement("div");
+
+    tooltip.classList.add("tooltip");
+    tooltip.style.setProperty("--top", `${coords.y}px`);
+    tooltip.style.setProperty("--left", `${coords.x - 100}px`);
+    tooltip.style.cssText += `animation-duration: ${duration}ms; left: var(--left); top: var(--top);`;
+
+    return [tooltip, duration, coords.y];
 
 }
 

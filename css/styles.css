@@ -12,6 +12,9 @@ html {
     font-size: 20px;
     --red-orange: hsl(17, 95%, 40%);
     --max-width: 1300px;
+    --border-thin: url(../assets/border-image-line.webp) fill 25 / 9px round stretch;
+    --border-thick-image: url(../assets/border-image-line2.webp);
+    --border-thick: var(--border-thick-image) fill 6% / 10px  stretch round;
 }
 
 body {
@@ -282,10 +285,6 @@ select {
 
 button, 
 input[type="submit"] {
-    --saturation: 50%;
-    --lightness: 50%;
-    --border-sat: 40%;
-    --border-light: 30%;
     --shadow: 0.75;
     white-space: normal;
     font-family: "Permanent Marker", "Comic Sans MS", sans-serif;
@@ -295,25 +294,12 @@ input[type="submit"] {
     min-height: 2rem;
     min-width: 3rem;
     padding: 0.5rem 1rem;
-    border-width: 0.25rem;
     border-style: solid;
-    border-radius: 0.5rem;
     box-shadow: 0.2rem 0.2rem 0.3rem rgba(0,0,0,var(--shadow));
     transition: 100ms;
     max-width: 500px;
 
-    &:hover {
-        --saturation: 65%;
-        --lightness: 65%;
-        --border-sat: 75%;
-        --border-light: 35%;
-    }
-
     &:active {
-        --saturation: 50%;
-        --lightness: 40%;
-        --border-sat: 35%;
-        --border-light: 15%;
         --shadow: 0;
     }
 }
@@ -331,8 +317,7 @@ label[for="file"] {
 
     & button {
         font-weight: 100;
-        border: 9px solid transparent;
-        border-image: url(../assets/border-image-line.webp) 18 stretch;
+        border-image: var(--border-thin);
         font-family: "Rubik Dirt", "Arial Black", "Arial", sans-serif;
         background-color: transparent;
         color: #000;
@@ -344,8 +329,8 @@ input[type="submit"] {
     position: relative;
     font-size: 1.5rem;
     background: #fff;
-    border-width: 10px;
-    border-image: url(../assets/border-image-line2.webp) 30 stretch;
+    border-color: transparent;
+    border-image: var(--border-thick);
     border-image-outset: 3px;
     margin: 0 auto 2rem;
 
@@ -353,7 +338,7 @@ input[type="submit"] {
     &[aria-disabled="true"] {
         color: #fff;
         background: var(--red-orange);
-        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+        box-shadow: 0 0 0 rgba(0,0,0,0);
     }
 
     &[aria-disabled="true"] {
@@ -386,10 +371,8 @@ input[type="submit"] {
     margin: 0 1rem;
     text-align: center;
     border-style: solid;
-    border-color: transparent;
-    border-width: 19px;
-    border-image: url(../assets/border-image-line2.webp) 44 stretch;
-    border-image-outset: 7px;
+    border-image: var(--border-thick-image) fill 35 30 / 15px stretch;
+    border-image-outset: 9px;
     box-shadow: 0.5rem 0.5rem 0.5rem rgba(0,0,0,0.75);
 
     & h1 {
@@ -401,10 +384,8 @@ input[type="submit"] {
 
 .modal div > button {
     background-color: #fff;
-    border-color: transparent;
-    border-width: 9px;
-    border-image: url(../assets/border-image-line.webp) 13 stretch;
-    border-image-outset: 3px;
+    border-image: var(--border-thin);
+    border-image-outset: 1;
 
     &:active {
         color: #fff;
@@ -426,7 +407,6 @@ input[type="submit"] {
     text-align: center;
 
     & p {
-        filter: blur(0.45px);
         color: hsl(0, 88%, 25%);
     }
 
@@ -438,13 +418,14 @@ input[type="submit"] {
 .tooltip {
     position: absolute;
     width: max-content;
+    max-width: 12ch;
+    padding: 0.5rem 1rem;
     font-family: "Permanent Marker", "Comic Sans MS", sans-serif;
     background-color: #fff;
     border-style: solid;
     border-color: transparent;
-    border-width: 9px;
-    border-image: url(../assets/border-image-line.webp) 13 stretch;
-    border-image-outset: 4px;
+    border-image: var(--border-thick);
+    border-image-outset: 1;
     animation-name: FloatyToolTip;
     animation-iteration-count: 1;
     box-shadow: 0.25rem 0.25rem 0.25rem rgba(0,0,0,0.75);
@@ -453,7 +434,6 @@ input[type="submit"] {
 }
 
 @keyframes FloatyToolTip {
-
     0% {
         opacity: 1;
     }
@@ -465,7 +445,6 @@ input[type="submit"] {
     100% {
         opacity: 0;
     }
-
 }
 
 footer {
