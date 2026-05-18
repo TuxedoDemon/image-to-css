@@ -2,7 +2,8 @@
 declare(strict_types=1);
 \define("ABSPATH", \str_replace("\\", "/", __DIR__));
 
-include '../autoloader.php';
+$shitpatch = str_replace("/php", "", ABSPATH);
+include $shitpatch . '/autoloader.php';
 
 use Uri\WhatWg\URL;
 use ImageToColorCodes\{
