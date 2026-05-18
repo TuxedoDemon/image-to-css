@@ -75,7 +75,7 @@ const handleCopyEvent = async (e) => {
     try {
         await navigator.clipboard.writeText(Output.txt);
         message = document.createTextNode("Code Copied!");
-    } catch {
+    } catch (e) {
         message = document.createTextNode("Couldn't Copy! Too Big!!");
     }
 
