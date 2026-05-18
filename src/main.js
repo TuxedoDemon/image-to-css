@@ -71,10 +71,14 @@ const handleCopyEvent = async (e) => {
     let message;
     const coords = getRect(e);
     const [tooltip, duration, y] = createToolTip(coords);
-    await navigator.clipboard.writeText(Output.txt).then(
-        success => message = document.createTextNode("Code Copied!"),
-        rejected => message = document.createTextNode("Couldn't Copy! Too Big!!")
-    );
+
+    try {
+        await navigator.clipboard.writeText(Output.txt);
+        message = document.createTextNode("Code Copied!");
+    } catch {
+        message = document.createTextNode("Couldn't Copy! Too Big!!");
+    }
+
     tooltip.append(message);
     OutputData.canvas.append(tooltip);
     animateTooltip(tooltip, duration, y);
