@@ -1,10 +1,14 @@
 <?php
 declare(strict_types=1);
+\define("ABSPATH", \str_replace("\\", "/", __DIR__));
+
+include '../autoloader.php';
 
 use Uri\WhatWg\URL;
-
-include 'control.php';
-include 'ImageTo.php';
+use ImageToColorCodes\{
+    Control,
+    ImageTo,
+};
 
 $request = \strtoupper($_SERVER["REQUEST_METHOD"]);
 

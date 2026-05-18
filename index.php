@@ -1,13 +1,11 @@
 <?php
 declare(strict_types=1);
+\define("ABSPATH", \str_replace("\\", "/", __DIR__) . "/php");
 
-include 'php/control.php';
+include 'autoloader.php';
+include (\file_exists('php/config.dev.php')) ? 'php/config.dev.php' : 'php/config.php';
 
-if (\file_exists('php/config.dev.php')) {
-    include 'php/config.dev.php';
-} else {
-    include 'php/config.php';
-}
+use ImageToColorCodes\Control;
 
 function createList(array $options, string $string = ""): string {
 
@@ -21,7 +19,13 @@ function createList(array $options, string $string = ""): string {
 
 }
 
-$valid_img_types = ["image/png", "image/webp", "image/gif", "image/jpeg", "image/bmp"];
+$valid_img_types = [];
+$mime = Control::Types->getValue();
+
+foreach($mime as $value) {
+    $valid_img_types[] = $value["mime"];
+}
+
 $types = \implode(", ", $valid_img_types);
 $modes = createList(Control::Modes->getValue());
 $widths = createList(Control::Widths->getValue(), " Units");

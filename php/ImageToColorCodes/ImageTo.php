@@ -1,5 +1,8 @@
 <?php
 declare(strict_types=1);
+namespace ImageToColorCodes;
+
+use GdImage;
 
 class ImageTo {
 
@@ -112,14 +115,8 @@ class ImageTo {
 
         self::$imgtype = \exif_imagetype($imgpath);
 
-        $img = match (self::$imgtype) {
-            2 => \imagecreatefromjpeg($imgpath),
-            3 => @\imagecreatefrompng($imgpath), // sometimes PNGs have an erroneous sRGB profile?? we can't fix it but this yells about it anyway, so we tell it to shut up
-            18 => \imagecreatefromwebp($imgpath),
-            6 => \imagecreatefrombmp($imgpath),
-            1 => \imagecreatefromgif($imgpath),
-            default => null,
-        };
+        $valid = Control::Types->getValue()[self::$imgtype] ?? null;
+        $img = $valid ? $valid["function"]($imgpath) : null;
 
         if (!$img) {
             $this->error = true;
